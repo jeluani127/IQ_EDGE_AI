@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IQ Edge AI — Real-time AI that sees, guides &amp; audits factories</title>
+<meta name="description" content="IQ Edge AI turns the cameras a factory already has into a real-time training, quality and compliance system for regulated manufacturing. On-premise. Video never leaves the plant." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#051c2c; --navy-2:#0a2a40; --blue:#1f56c9; --cyan:#29b6e8;
+    --ink:#0b1620; --slate:#5b6b7a; --line:#e5ebf1; --bg:#fff; --bg-soft:#f5f8fb;
+    --serif:'Source Serif 4',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --display:'Poppins',var(--sans);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:600}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.14;color:var(--navy)}
+  .btn{display:inline-block;font-weight:600;font-size:15px;padding:14px 28px;border-radius:2px;transition:.25s;cursor:pointer}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:#1746a8;transform:translateY(-2px)}
+  .btn-ghost{border:1px solid rgba(255,255,255,.4);color:#fff}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+  /* reveal-on-scroll */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:60;background:rgba(5,28,44,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{font-family:var(--display);font-weight:700;color:#fff;font-size:21px}
+  .brand span{color:var(--cyan)}
+  .brand small{display:block;font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#9db4c6;margin-top:-3px}
+  .navlinks{display:flex;gap:30px;align-items:center}
+  .navlinks a{color:#cfdae4;font-size:14px;font-weight:500;transition:.2s}
+  .navlinks a:hover{color:#fff}
+  .navlinks .cta{color:#fff;border:1px solid var(--cyan);padding:9px 18px;border-radius:2px}
+  .navlinks .cta:hover{background:var(--cyan);color:var(--navy)}
+  .menu-btn{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;min-height:92vh;display:flex;align-items:center;color:#fff;overflow:hidden;background:var(--navy)}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;animation:kenburns 22s ease-in-out infinite alternate;opacity:.42}
+  @keyframes kenburns{from{transform:scale(1) translate(0,0)}to{transform:scale(1.14) translate(-2%,-2%)}}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(5,28,44,.96) 0%,rgba(5,28,44,.8) 42%,rgba(5,28,44,.35) 100%)}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;width:100%}
+  .hero-copy .eyebrow{color:var(--cyan)}
+  .hero-copy h1{color:#fff;font-size:clamp(38px,5.6vw,64px);margin:18px 0 22px;max-width:16ch}
+  .hero-copy p.lede{font-size:19px;color:#cad9e6;max-width:52ch;margin-bottom:32px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .live-pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.05em;color:#bfe6f7;background:rgba(41,182,232,.1);border:1px solid rgba(41,182,232,.35);border-radius:100px;padding:6px 14px;margin-bottom:6px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);animation:blink 1.6s infinite}
+  @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(41,182,232,.6)}50%{opacity:.5;box-shadow:0 0 0 6px rgba(41,182,232,0)}}
+  .spin-note{margin-top:30px;font-size:13px;color:#8fa6b8}
+  .spin-note b{color:#cfe6f5}
+
+  /* PHONE in hero */
+  .hero-device{justify-self:center;animation:float 6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+  /* DEVICE MOCKUPS -------------------------------------------------- */
+  .phone{width:250px;height:512px;border-radius:38px;background:#0b0f14;padding:12px;box-shadow:0 30px 70px -20px rgba(0,0,0,.65),inset 0 0 0 2px #263743;position:relative}
+  .phone::before{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:96px;height:20px;background:#0b0f14;border-radius:0 0 14px 14px;z-index:5}
+  .phone .screen{width:100%;height:100%;border-radius:28px;overflow:hidden;position:relative}
+
+  .laptop{width:520px;max-width:100%}
+  .laptop .lid{background:#0b0f14;border-radius:16px 16px 0 0;padding:12px 12px 0;box-shadow:inset 0 0 0 2px #263743}
+  .laptop .screen{width:100%;aspect-ratio:16/10;border-radius:8px;overflow:hidden;position:relative}
+  .laptop .base{height:16px;background:linear-gradient(#c6ced6,#8b97a3);border-radius:0 0 14px 14px;position:relative}
+  .laptop .base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:7px;background:#6b7784;border-radius:0 0 8px 8px}
+
+  .tablet{width:300px;background:#0b0f14;border-radius:26px;padding:16px;box-shadow:0 30px 70px -22px rgba(0,0,0,.6),inset 0 0 0 2px #263743}
+  .tablet .screen{aspect-ratio:4/3;border-radius:12px;overflow:hidden;position:relative}
+
+  /* the animated "product" UI that lives inside every screen */
+  .ui{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 0%,#0e2233,#061420);color:#dbeafe;font-family:var(--sans)}
+  .ui .top{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;font-size:9px;letter-spacing:.08em;border-bottom:1px solid rgba(255,255,255,.08);color:#9fd7ef}
+  .ui .top b{font-family:var(--display);font-weight:700;color:#fff;letter-spacing:.04em}
+  .ui .live{display:flex;align-items:center;gap:5px;color:var(--cyan)}
+  .ui .live i{width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;animation:blink 1.5s infinite}
+  .ui .feed{position:absolute;top:32px;left:8px;right:8px;bottom:46px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#0a2436,#0d3247)}
+  .ui .feed img{width:100%;height:100%;object-fit:cover;opacity:.5;filter:saturate(.7) contrast(1.05)}
+  .ui .scan{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);animation:scanmove 3.2s ease-in-out infinite}
+  @keyframes scanmove{0%{top:4%}50%{top:92%}100%{top:4%}}
+  .box{position:absolute;border:1.5px solid var(--cyan);border-radius:4px;box-shadow:0 0 0 1px rgba(41,182,232,.25)}
+  .box::after{content:attr(data-l);position:absolute;top:-13px;left:-1px;font-size:7px;background:var(--cyan);color:#04212f;padding:1px 5px;border-radius:2px;font-weight:700;letter-spacing:.03em;white-space:nowrap}
+  .b1{top:22%;left:16%;width:34%;height:40%;animation:pulseb 2.4s infinite}
+  .b2{top:40%;left:58%;width:26%;height:34%;animation:pulseb 2.4s .8s infinite}
+  @keyframes pulseb{0%,100%{opacity:.55}50%{opacity:1}}
+  .ui .bar{position:absolute;left:8px;right:8px;bottom:8px;height:32px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:7px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:8.5px}
+  .ui .metric{display:flex;flex-direction:column;line-height:1.25}
+  .ui .metric span{color:#7fa8c0;font-size:7px;letter-spacing:.06em}
+  .ui .metric b{color:#fff;font-size:11px;font-family:var(--display)}
+  .ui .ok{color:var(--cyan)}
+
+  /* SHOWCASE (devices row) */
+  .showcase{background:linear-gradient(180deg,#f5f8fb,#eaf1f7)}
+  .device-stage{display:flex;align-items:flex-end;justify-content:center;gap:-40px;margin-top:52px;position:relative;min-height:380px}
+  .device-stage .tablet{transform:translateX(40px) translateY(-10px) rotate(-3deg);z-index:1;animation:float 7s ease-in-out infinite}
+  .device-stage .phone{transform:translateX(-60px) rotate(4deg);z-index:3;animation:float 6s ease-in-out .5s infinite}
+  .device-stage .laptop{z-index:2;animation:float 7.5s ease-in-out .2s infinite}
+
+  /* SECTION */
+  section .wrap{padding:88px 28px}
+  .sec-head{max-width:72ch}
+  .sec-head h2{font-size:clamp(28px,3.6vw,42px);margin:14px 0 16px}
+  .sec-head p{color:var(--slate);font-size:17px;max-width:64ch}
+  .center{text-align:center;margin:0 auto}
+
+  /* STAT STRIP */
+  .stats{background:var(--navy);color:#fff}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding:56px 28px}
+  .stat .n{font-family:var(--display);font-weight:700;font-size:34px;color:var(--cyan);line-height:1}
+  .stat .l{font-size:13px;color:#a9c1d2;margin-top:10px}
+
+  /* WHY with photos */
+  .why{background:#fff}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px}
+  .why-card{border-radius:6px;overflow:hidden;border:1px solid var(--line);background:#fff;transition:.3s}
+  .why-card:hover{transform:translateY(-6px);box-shadow:0 22px 44px -24px rgba(5,28,44,.4)}
+  .why-card .ph{height:170px;overflow:hidden}
+  .why-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+  .why-card:hover .ph img{transform:scale(1.08)}
+  .why-card .bd{padding:22px 22px 26px}
+  .why-card h3{font-size:19px;margin-bottom:8px}
+  .why-card p{color:var(--slate);font-size:15px}
+
+  /* MODULES */
+  .modules{background:var(--navy);color:#fff;position:relative}
+  .modules .sec-head h2{color:#fff}.modules .sec-head p{color:#b9cad8}
+  .mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .mod{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:30px 26px;display:flex;flex-direction:column;transition:.3s}
+  .mod:hover{border-color:rgba(41,182,232,.5);transform:translateY(-6px)}
+  .mod .num{font-family:var(--display);font-weight:700;color:var(--cyan);font-size:13px;letter-spacing:.14em}
+  .mod h3{color:#fff;font-size:23px;margin:12px 0 6px}
+  .mod .tag{font-size:11.5px;font-weight:600;letter-spacing:.04em;padding:4px 11px;border-radius:100px;align-self:flex-start;margin-bottom:16px}
+  .tag.live{background:rgba(41,182,232,.16);color:var(--cyan);border:1px solid rgba(41,182,232,.4)}
+  .tag.dev{background:rgba(255,255,255,.07);color:#b9cad8;border:1px solid rgba(255,255,255,.18)}
+  .mod p{color:#c6d5e2;font-size:15px}
+
+  /* LOOP */
+  .loop{background:var(--bg-soft)}
+  .loop-flow{display:flex;align-items:stretch;margin-top:48px;flex-wrap:wrap}
+  .step{flex:1 1 180px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:24px 20px}
+  .step .s{font-family:var(--display);font-weight:700;color:var(--blue);font-size:13px}
+  .step h4{font-size:18px;margin:8px 0 6px}
+  .step p{color:var(--slate);font-size:14px}
+  .arrow{display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:22px;padding:0 8px}
+  .loop-note{margin-top:34px;background:var(--navy);color:#dbe8f2;border-radius:6px;padding:24px 28px;font-size:15px}
+  .loop-note b{color:var(--cyan)}
+
+  /* TRACTION */
+  .traction{background:#fff}
+  .tr-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:18px}
+  .tr-photo{border-radius:8px;overflow:hidden;position:relative;box-shadow:0 26px 54px -26px rgba(5,28,44,.5)}
+  .tr-photo img{width:100%;height:430px;object-fit:cover}
+  .tr-photo .cap{position:absolute;left:0;bottom:0;right:0;background:linear-gradient(transparent,rgba(5,28,44,.85));color:#fff;padding:28px 22px 18px;font-size:13px;letter-spacing:.04em}
+  .tr-list{list-style:none;margin-top:8px}
+  .tr-list li{padding:16px 0;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:baseline}
+  .tr-list li:last-child{border-bottom:0}
+  .tr-list .k{font-family:var(--display);font-weight:700;color:var(--blue);font-size:22px;min-width:130px}
+  .tr-list .v{color:var(--ink);font-size:15px}
+
+  /* CONTACT */
+  .contact{position:relative;color:#fff;text-align:center;overflow:hidden;background:var(--navy)}
+  .contact .cbg{position:absolute;inset:0;z-index:0}
+  .contact .cbg img{width:100%;height:100%;object-fit:cover;opacity:.28;animation:kenburns 24s ease-in-out infinite alternate}
+  .contact .cbg::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(5,28,44,.9),rgba(5,28,44,.94))}
+  .contact .wrap{position:relative;z-index:2;padding:96px 28px}
+  .contact h2{color:#fff;font-size:clamp(28px,3.8vw,44px);max-width:20ch;margin:14px auto 20px}
+  .contact p{color:#c6d5e2;max-width:56ch;margin:0 auto 30px;font-size:17px}
+
+  /* FOOTER */
+  footer{background:#03131f;color:#8fa6b8;font-size:14px}
+  footer .wrap{padding:40px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer .brand{font-size:17px}
+  footer a{color:#b9cad8}footer a:hover{color:#fff}
+
+  @media(max-width:960px){
+    .hero-grid{grid-template-columns:1fr;gap:20px}
+    .hero-device{display:none}
+    .stats .wrap{grid-template-columns:repeat(2,1fr)}
+    .why-grid,.mod-grid{grid-template-columns:1fr}
+    .tr-grid{grid-template-columns:1fr;gap:30px}
+    .arrow{transform:rotate(90deg)}
+    .device-stage{flex-direction:column;align-items:center;gap:26px}
+    .device-stage .tablet,.device-stage .phone,.device-stage .laptop{transform:none;animation:none}
+    .navlinks{display:none}.menu-btn{display:block}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top">IQ <span>Edge</span> AI<small>A spin-off of Alignity IQ</small></a>
+      <div class="navlinks">
+        <a href="#showcase">Product</a>
+        <a href="#why">Why now</a>
+        <a href="#modules">Modules</a>
+        <a href="#how">How it works</a>
+        <a href="#traction">Traction</a>
+        <a class="cta" href="#contact">Request access</a>
+      </div>
+      <button class="menu-btn" onclick="var n=document.querySelector('.navlinks');n.style.display=(getComputedStyle(n).display==='none')?'flex':'none'">&#9776;</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=2000&q=80&auto=format&fit=crop" alt="Operator on a modern production floor" />
+  </div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="live-pill"><span class="dot"></span> Live in 3 factories today</span>
+        <div class="eyebrow">Applied AI · Regulated Manufacturing</div>
+        <h1>Real-time AI that sees, guides &amp; audits your factory floor</h1>
+        <p class="lede">IQ Edge AI turns the cameras a plant already has into a live training, quality and compliance system for regulated manufacturing. It runs on-premise — the video never leaves the plant.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Request access</a>
+          <a class="btn btn-ghost" href="#showcase">See it on device</a>
+        </div>
+        <p class="spin-note">A spin-off of <b>Alignity IQ</b> — regulatory intelligence for life sciences &amp; manufacturing.</p>
+      </div>
+      <!-- floating phone with live UI -->
+      <div class="hero-device">
+        <div class="phone">
+          <div class="screen">
+            <div class="ui">
+              <div class="top"><b>IQ&nbsp;Edge&nbsp;AI</b><span class="live"><i></i> LIVE</span></div>
+              <div class="feed">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80&auto=format&fit=crop" alt="" onerror="this.style.display='none'"/>
+                <div class="scan"></div>
+                <div class="box b1" data-l="OPERATOR"></div>
+                <div class="box b2" data-l="STEP 3/7"></div>
+              </div>
+              <div class="bar">
+                <div class="metric"><span>DEVIATIONS</span><b class="ok">0</b></div>
+                <div class="metric"><span>SOP MATCH</span><b class="ok">98%</b></div>
+                <div class="metric"><span>SHIFT LOG</span><b>REC ●</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat reveal"><div class="n" data-count="3">0</div><div class="l">Regulated factories in active pilot</div></div>
+    <div class="stat reveal d1"><div class="n" data-count="100" data-prefix="~">0</div><div class="l">Machines in scope across pilots</div></div>
+    <div class="stat reveal d2"><div class="n" data-count="90" data-suffix="%">0</div><div class="l">Action-recognition accuracy (from 65%)</div></div>
+    <div class="stat reveal d3"><div class="n">On-prem</div><div class="l">Video never leaves the plant</div></div>
+  </div>
+</div>
+
+<!-- SHOWCASE: devices -->
+<section class="showcase" id="showcase">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">In the hands of the floor</span>
+      <h2>On the phone, the tablet and the laptop your teams already use</h2>
+      <p>No new hardware, no control room. Operators get a copilot in their pocket, supervisors get a live view on a tablet, and quality leads get the full picture on a laptop — all from the cameras already on the line.</p>
+    </div>
+
+    <div class="device-stage reveal d1">
+      <!-- TABLET -->
+      <div class="tablet">
+        <div class="screen">
+          <div class="ui">
+            <div class="top"><b>IQ&nbsp;Edge&nbsp;AI</b><span class="live"><i></i> LIVE · LINE 2</span></div>
+            <div class="feed">
+              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80&auto=format&fit=crop" alt="" onerror="this.style.display='none'"/>
+              <div class="scan"></div>
+              <div class="box b1" data-l="TASK OK"></div>
+              <div class="box b2" data-l="TOOL"></div>
+            </div>
+            <div class="bar">
+              <div class="metric"><span>DEVIATIONS</span><b class="ok">0</b></div>
+              <div class="metric"><span>THROUGHPUT</span><b>+12%</b></div>
+              <div class="metric"><span>AUDIT</span><b class="ok">READY</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAPTOP -->
+      <div class="laptop">
+        <div class="lid">
+          <div class="screen">
+            <div class="ui">
+              <div class="top"><b>IQ&nbsp;Edge&nbsp;AI · Dashboard</b><span class="live"><i></i> LIVE</span></div>
+              <div class="feed">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1000&q=80&auto=format&fit=crop" alt="" onerror="this.style.display='none'"/>
+                <div class="scan"></div>
+                <div class="box b1" data-l="OPERATOR"></div>
+                <div class="box b2" data-l="SOP 3/7"></div>
+              </div>
+              <div class="bar">
+                <div class="metric"><span>PLANTS</span><b>3</b></div>
+                <div class="metric"><span>MACHINES</span><b>~100</b></div>
+                <div class="metric"><span>GAPS TODAY</span><b class="ok">2</b></div>
+                <div class="metric"><span>EVIDENCE</span><b class="ok">AUTO</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="base"></div>
+      </div>
+
+      <!-- PHONE -->
+      <div class="phone">
+        <div class="screen">
+          <div class="ui">
+            <div class="top"><b>IQ&nbsp;Edge&nbsp;AI</b><span class="live"><i></i> LIVE</span></div>
+            <div class="feed">
+              <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80&auto=format&fit=crop" alt="" onerror="this.style.display='none'"/>
+              <div class="scan"></div>
+              <div class="box b1" data-l="STEP 4/7"></div>
+              <div class="box b2" data-l="CHECK"></div>
+            </div>
+            <div class="bar">
+              <div class="metric"><span>ALERT</span><b class="ok">NONE</b></div>
+              <div class="metric"><span>SOP MATCH</span><b class="ok">98%</b></div>
+              <div class="metric"><span>VOICE</span><b>ON</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Why now</span>
+      <h2>Nearshoring is opening plants faster than know-how can follow</h2>
+      <p>Regulated manufacturers face two costly problems at once — and both worsen as production moves to Mexico and the Americas.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal d1">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80&auto=format&fit=crop" alt="Expert operator at work"/></div>
+        <div class="bd"><h3>Know-how walks out the door</h3><p>Process knowledge lives in a few expert operators. With 30–50% annual turnover, plants retrain constantly and lose expertise every time someone leaves.</p></div>
+      </div>
+      <div class="why-card reveal d2">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80&auto=format&fit=crop" alt="Compliance documentation"/></div>
+        <div class="bd"><h3>Compliance is manual and relentless</h3><p>Proving GMP / FDA / COFEPRIS compliance eats enormous effort — paper SOPs, clipboard audits, and evidence assembled by hand before every inspection.</p></div>
+      </div>
+      <div class="why-card reveal d3">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=900&q=80&auto=format&fit=crop" alt="Cameras and sensors on the line"/></div>
+        <div class="bd"><h3>The cameras are already there</h3><p>Plants already run IP cameras on the floor. Computer vision plus LLMs finally make it possible to capture, guide and document work directly — no new hardware fleet.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modules" id="modules">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" style="color:var(--cyan)">The platform</span>
+      <h2>Three modules. One intelligence layer for the line.</h2>
+      <p>Everything runs on-premise on edge servers. Only metadata reaches the cloud — the video stays inside the plant, essential for IP-sensitive, regulated factories.</p>
+    </div>
+    <div class="mod-grid">
+      <div class="mod reveal d1">
+        <div class="num">MODULE 01</div><h3>KnowBase</h3><span class="tag live">● Live in pilots</span>
+        <p>Records expert operators on video and automatically generates structured SOPs and training material — steps, times, acceptance criteria. Onboards new operators in days, not months.</p>
+      </div>
+      <div class="mod reveal d2">
+        <div class="num">MODULE 02</div><h3>FloorPilot</h3><span class="tag live">● Live in pilots</span>
+        <p>Watches production live and validates execution against the SOP and daily plan. Detects deviations, alerts by voice or Telegram, and produces an end-of-shift gap report.</p>
+      </div>
+      <div class="mod reveal d3">
+        <div class="num">MODULE 03</div><h3>VisionOps</h3><span class="tag dev">● In active development</span>
+        <p>Turns multiple camera streams into an automated visual logbook: heatmaps, incident timelines, and bottleneck detection — a continuous record of the floor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="loop" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>We close the whole loop</h2>
+      <p>Competitors analyze work. IQ Edge AI captures the expertise, writes the SOP, validates against it live, and produces the audit trail — turning each plant's know-how into a structured, machine-readable asset.</p>
+    </div>
+    <div class="loop-flow">
+      <div class="step reveal d1"><div class="s">STEP 1</div><h4>Capture</h4><p>Record expert operators on the cameras already installed.</p></div>
+      <div class="arrow reveal d1">→</div>
+      <div class="step reveal d2"><div class="s">STEP 2</div><h4>Generate SOP</h4><p>Auto-produce structured SOPs, times and acceptance criteria.</p></div>
+      <div class="arrow reveal d2">→</div>
+      <div class="step reveal d3"><div class="s">STEP 3</div><h4>Validate live</h4><p>Check execution against the SOP in real time; flag deviations.</p></div>
+      <div class="arrow reveal d3">→</div>
+      <div class="step reveal d4"><div class="s">STEP 4</div><h4>Audit trail</h4><p>Compliance evidence generated automatically as you operate.</p></div>
+    </div>
+    <div class="loop-note reveal">Compliance evidence is produced as a <b>byproduct of operating</b> — not scrambled before an audit. Over time, the SOP + expert-video library becomes the structured knowledge base a plant can later use to deploy robots without starting from zero.</div>
+  </div>
+</section>
+
+<!-- TRACTION -->
+<section class="traction" id="traction">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Where we are</span><h2>Working product, running on real production floors</h2></div>
+    <div class="tr-grid">
+      <div class="tr-photo reveal d1">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1100&q=80&auto=format&fit=crop" alt="Team reviewing operations on a tablet"/>
+        <div class="cap">Co-developed on the floor, with operators, on the hardest lines.</div>
+      </div>
+      <ul class="tr-list reveal d2">
+        <li><span class="k">3 factories</span><span class="v">Regulated manufacturers running the platform in active pilots.</span></li>
+        <li><span class="k">~100 machines</span><span class="v">In scope across the pilots — started on their highest-complexity lines.</span></li>
+        <li><span class="k">65% → 90%</span><span class="v">Action-recognition accuracy, improved in four weeks on real footage.</span></li>
+        <li><span class="k">2 of 3</span><span class="v">Modules functional and deployed today; the third in active development.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="cbg"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80&auto=format&fit=crop" alt=""/></div>
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--cyan)">Get in touch</span>
+    <h2>See IQ Edge AI running on a factory floor</h2>
+    <p>For a walkthrough, a pilot conversation, or early access — start the conversation.</p>
+    <a class="btn btn-primary" href="mailto:info@alignityiqedge.com?subject=IQ%20Edge%20AI%20—%20Request%20access">Request access</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top" style="color:#fff">IQ <span style="color:var(--cyan)">Edge</span> AI</a>
+    <div>© 2026 IQ Edge AI · A spin-off of <a href="https://www.alignityiqedge.com">Alignity IQ</a> · <a href="mailto:info@alignityiqedge.com">info@alignityiqedge.com</a></div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // count-up stats
+  function countUp(el){
+    var target=+el.dataset.count, pre=el.dataset.prefix||'', suf=el.dataset.suffix||'', t0=null, dur=1300;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var val=Math.floor(p*target);
+      el.textContent=pre+val+suf; if(p<1)requestAnimationFrame(step); else el.textContent=pre+target+suf; }
+    requestAnimationFrame(step);
+  }
+  var cio=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); cio.unobserve(e.target);} });
+  },{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+</script>
+</body>
+</html>
